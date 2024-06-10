@@ -1,22 +1,3 @@
-import os
-import subprocess
-
-# Налаштування
-repo_url = "https://github.com/username/repository.git"
-commit_message = "Initial commit"
-
-# Створення файлу .gitignore
-gitignore_content = """venv/
-__pycache__/
-*.pyc
-instance/
-.env
-"""
-
-with open(".gitignore", "w") as f:
-    f.write(gitignore_content)
-
-# Створення файлу README.md
 readme_content = """# Сайт подорожей по Україні
 
 ## Встановлення
