@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Профіль - Сайт подорожей{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Профіль користувача</h2>
+  {% if current_user.is_authenticated %}
+  <p>Ласкаво просимо, {{ user.username }}!</p>
+  <p>Ваша електронна адреса: {{ user.email }}</p>
+  <p><a href="/logout">Вийти</a> з профілю.</p>
+  {% else %}
+  <p>Будь ласка, <a href="/login">увійдіть</a> у свій аккаунт.</p>
+  {% endif %}
+</div>
+{% endblock %}

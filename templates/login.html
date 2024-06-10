@@ -1,0 +1,22 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Увійти - Сайт подорожей{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Увійти на сайт</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="email">Електронна пошта</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Увійти</button>
+    </form>
+    <p class="mt-3">Ще не маєте акаунту? <a href="{{ url_for('register') }}">Зареєструватися</a></p>
+</div>
+{% endblock %}
