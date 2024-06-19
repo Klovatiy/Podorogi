@@ -2,6 +2,7 @@
 # Подорожі по Україні
 
 ## Встановлення
+
 1. Склонуйте репозиторій на ваш комп'ютер:
    ```bash
    git clone https://github.com/Klovatiy/Podorogi.git
