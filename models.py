@@ -1,32 +1,25 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from datetime import datetime
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    purchases = db.relationship('Purchase', backref='user', lazy=True)
 
 class Place(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(50), nullable=False)
+    purchases = db.relationship('Purchase', backref='place', lazy=True)
 
-class Review(db.Model):
+class Purchase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     place_id = db.Column(db.Integer, db.ForeignKey('place.id'), nullable=False)
-    text = db.Column(db.Text, nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
-
-class Route(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    places = db.relationship('Place', secondary='route_places', backref=db.backref('routes', lazy=True))
-
-route_places = db.Table('route_places',
-    db.Column('route_id', db.Integer, db.ForeignKey('route.id'), primary_key=True),
-    db.Column('place_id', db.Integer, db.ForeignKey('place.id'), primary_key=True)
-)
+    purchase_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
